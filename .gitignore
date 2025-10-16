@@ -1,0 +1,21 @@
+# Go
+backend/bin/
+backend/*.db
+backend/.env
+
+# Node
+frontend/node_modules/
+frontend/build/
+frontend/.svelte-kit/
+frontend/.env
+
+# OS
+.DS_Store
+*.swp
+*.swo
+*~
+
+# IDE
+.vscode/
+.idea/
+*.iml
