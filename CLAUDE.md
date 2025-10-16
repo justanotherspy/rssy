@@ -10,7 +10,7 @@ RSSY (pronounced "rizzy") is a full-stack RSS reader with a Go backend, Svelte f
 
 ## Technology Stack
 
-- **Backend:** Go 1.21+ with chi router, SQLite3
+- **Backend:** Go 1.21+ (project uses 1.25.0) with chi router, SQLite3
 - **Frontend:** Svelte 5, SvelteKit v2, TypeScript, Axios
 - **Database:** SQLite with automatic schema initialization
 - **Build:** Makefile for automation
@@ -18,6 +18,9 @@ RSSY (pronounced "rizzy") is a full-stack RSS reader with a Go backend, Svelte f
 ## Common Commands
 
 ### Development
+
+**Note:** These commands start the application in development mode.
+
 ```bash
 # Quick start (requires 2 terminals)
 make backend-run      # Terminal 1: Start API on :8080
@@ -160,14 +163,18 @@ Frontend → Calls /api/posts → Backend queries SQLite → Returns JSON → Di
 
 Backend serves RESTful JSON API on port 8080:
 
+**Health Check:**
+- `GET /health` - Health check endpoint (returns "OK")
+
 **Feeds:**
 - `GET /api/feeds` - List all feeds
 - `POST /api/feeds` - Create feed (body: {name, url, category?})
 - `POST /api/feeds/reddit` - Quick-add Reddit feed (body: {subreddit})
+- `POST /api/feeds/refresh` - Manually refresh all feeds
 - `GET /api/feeds/:id` - Get feed by ID
 - `PUT /api/feeds/:id` - Update feed
 - `DELETE /api/feeds/:id` - Delete feed
-- `POST /api/feeds/:id/refresh` - Manually trigger feed refresh
+- `POST /api/feeds/:id/refresh` - Manually trigger specific feed refresh
 
 **Posts:**
 - `GET /api/posts` - List all posts (with limit/offset)

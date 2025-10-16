@@ -10,7 +10,7 @@ Both backend and frontend are fully implemented and production-ready.
 
 ### Prerequisites
 - Node.js 18+
-- Go 1.21+
+- Go 1.21+ (project uses 1.25.0)
 - SQLite3
 
 ### Run Locally
@@ -36,6 +36,8 @@ make install-deps      # Install all dependencies
 make backend-run       # Run backend
 make frontend-run      # Run frontend
 ```
+
+**Note:** These commands start the application in development mode. For production deployment, see the [Deployment](#deployment) section.
 
 ## Project Structure
 
@@ -104,7 +106,7 @@ stream/
 ### Technology Stack
 
 **Backend:**
-- Go 1.21+ with standard library HTTP server
+- Go 1.21+ with chi router
 - SQLite database with migration support
 - Automatic RSS/Atom feed polling
 - RESTful JSON API
@@ -174,14 +176,18 @@ npm run preview        # Preview production build
 
 Backend API runs on `http://localhost:8080`
 
+**Health Check:**
+- `GET /health` - Health check endpoint (returns "OK")
+
 **Feeds:**
 - `GET /api/feeds` - List all feeds
 - `POST /api/feeds` - Create feed (body: `{name, url, category?}`)
 - `POST /api/feeds/reddit` - Add Reddit feed (body: `{subreddit}`)
+- `POST /api/feeds/refresh` - Manually refresh all feeds
 - `GET /api/feeds/:id` - Get specific feed
 - `PUT /api/feeds/:id` - Update feed
 - `DELETE /api/feeds/:id` - Delete feed
-- `POST /api/feeds/:id/refresh` - Manually refresh feed
+- `POST /api/feeds/:id/refresh` - Manually refresh specific feed
 
 **Posts:**
 - `GET /api/posts` - List all posts
